@@ -1,7 +1,27 @@
 require ( './helpers.js' );
 
+const employee = {
+  name: 'Sam',
+};
+
 describe('employees', function() {
-  describe('updateEmployeeWithKeyAndValue(employee, key, value)', function () {
+
+function updateEmployeeWithKeyAndValue(employee, key, value) {
+  const updatedEmployee = { ...employee };
+  updatedEmployee[key] = value;
+  return updatedEmployee;
+}
+function deleteFromEmployeeByKey(employee, key) {
+  const newEmployee = { ...employee };
+  delete newEmployee[key];
+  return newEmployee;
+}
+function destructivelyDeleteFromEmployeeByKey(employee, key) {
+  delete employee[key];
+  return employee;
+}
+  describe('updateEmployeeWithKeyAndValue(employee, key, value)', 
+  function () {
     beforeEach(function () {
       for (const key in employee) {
         delete employee[key];
@@ -25,6 +45,10 @@ describe('employees', function() {
   });
 
   describe('destructivelyUpdateEmployeeWithKeyAndValue(employee, key, value)', function () {
+    function destructivelyUpdateEmployeeWithKeyAndValue(employee, key, value) {
+      employee[key] = value;
+      return employee;
+    }
     it('updates `employee` with the given `key` and `value` (it is destructive) and returns the entire updated employee', function () {
       expect(destructivelyUpdateEmployeeWithKeyAndValue(employee, 'streetAddress', '12 Broadway')).to.eql({
         name: 'Sam',
@@ -67,4 +91,12 @@ describe('employees', function() {
       expect(employee).to.equal(newEmployee);
     });
   });
+});
+const updateEmployeeWithKeyAndValue = (employee, key, value) => {
+  const updatedEmployee = { ...employee };
+  updatedEmployee[key] = value;
+  updatedEmployee;
+};
+
+describe('employees', function() {
 });
